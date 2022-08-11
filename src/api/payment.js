@@ -16,8 +16,23 @@ export const useFetchPayments = (input, reload) => {
   return data;
 };
 
+export const useFetchMetrics = (id) => {
+  const [data, setData] = useState();
+  useEffect(() => {
+    async function fetchData() {
+      createAxiosInstance()
+        .get(`payments/getMetrics/${id.data.userId}`)
+        .then((res) => {
+          setData(res.data);
+        });
+    }
+    fetchData();
+  }, []);
+  return data;
+};
+
 export const updatePayment = async (id, input) => {
-  console.log(input)
+  console.log(input);
   const res = await createAxiosInstance().put(
     `payments/updatePayment/${id}`,
     input
